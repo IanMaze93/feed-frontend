@@ -8,8 +8,8 @@ export default function Banner() {
           className="-translate-x-3"
           src="/logo-feed.png"
           alt="The Feed logo"
-          width={500}
-          height={500}
+          width={400}
+          height={400}
           priority
         />
       </div>
