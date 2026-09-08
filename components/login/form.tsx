@@ -19,12 +19,20 @@ export default function LoginForm() {
         />
       </div>
 
-      <button
-        className="self-center rounded border-1 border-[#ff6a00] p-2 hover:bg-[#ff6a00] font-bold hover:text-white"
-        type="submit"
-      >
-        Login
-      </button>
+      <div className="flex gap-4 self-center">
+        <button
+          className="rounded border-1 border-[#ff6a00] p-2 hover:bg-[#ff6a00] font-bold hover:text-white"
+          type="submit"
+        >
+          Login
+        </button>
+        <button
+          className="rounded border-1 border-[#ff6a00] p-2 hover:bg-[#ff6a00] font-bold hover:text-white"
+          type="button"
+        >
+          Sign Up
+        </button>
+      </div>
     </form>
   );
 }
