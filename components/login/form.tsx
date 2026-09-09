@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, SubmitEvent } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [outputMessage, setOutputMessage] = useState("");
@@ -13,9 +15,6 @@ export default function LoginForm() {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({ username, password }),
       });
 
@@ -29,12 +28,11 @@ export default function LoginForm() {
       setOutputMessage("");
       const { user_id } = await response.json();
       console.log("Login successful! User ID:", user_id);
+      router.push(`/feed/${user_id}`); // Redirect to the feed page with the user ID
       // Handle successful login (e.g., redirect, store token, etc.)
     } catch (error) {
       console.error("Login failed:", error);
-      setOutputMessage(
-        "Login failed. Please check your username and password."
-      );
+      setOutputMessage("Login failed.Please check your username and password.");
       // Handle login failure (e.g., show error message)
     }
   }
@@ -44,7 +42,7 @@ export default function LoginForm() {
       onSubmit={handleSubmit}
       className="flex gap-4 self-center rounded-md border-2 border-[#ff6a00] p-4 shadow-md flex-col items-start"
     >
-      <div className="flex items-center">
+      <div className="flex self-center">
         <label className="w-25 font-bold">UserName:</label>
         <input
           className="rounded border-1 border-[#ff6a00]"
@@ -55,7 +53,7 @@ export default function LoginForm() {
         />
       </div>
 
-      <div className="flex items-center">
+      <div className="flex self-center">
         <label className="w-25 font-bold">Password:</label>
         <input
           className="rounded border-1 border-[#ff6a00]"
@@ -76,6 +74,10 @@ export default function LoginForm() {
         <button
           className="rounded border-1 border-[#ff6a00] p-2 hover:bg-[#ff6a00] font-bold hover:text-white"
           type="button"
+          onClick={() => {
+            // Redirect to the signup page
+            router.push("/signup");
+          }}
         >
           Sign Up
         </button>
