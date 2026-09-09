@@ -6,12 +6,12 @@ enum SourceType {
 export function getBadgeColor(source: string): string {
   switch (source) {
     case SourceType.REDDIT:
-      return "bg-red-700";
+      return "bg-red-900";
 
     case SourceType.GOOGLE_NEWS:
-      return "bg-green-700";
+      return "bg-green-900";
 
     default:
-      return "bg-gray-700";
+      return "bg-gray-900";
   }
 }

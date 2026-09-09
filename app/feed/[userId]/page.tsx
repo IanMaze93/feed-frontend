@@ -63,24 +63,36 @@ export default async function Feed({ params }: Props) {
               </h2>
 
               <div className="flex-1 overflow-y-auto">
-                {topic.entries.map((story) => (
-                  <div key={story._id} className="border-b-2 border-[#ff6a00]">
-                    <a
-                      href={story.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-lg text-black dark:text-white"
+                {topic.entries
+                  .sort(
+                    (a, b) =>
+                      new Date(b.published_at).getTime() -
+                      new Date(a.published_at).getTime()
+                  )
+                  .map((story) => (
+                    <div
+                      key={story._id}
+                      className="border-b-2 border-[#ff6a00]"
                     >
-                      <h3
-                        className={`text-center font-bold ${getBadgeColor(story.source)} text-white`}
+                      <a
+                        href={story.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-lg text-black dark:text-white"
                       >
-                        {capitalize(story.source)}
-                      </h3>
+                        <h3
+                          className={`text-center font-bold ${getBadgeColor(story.source)} text-white`}
+                        >
+                          {capitalize(story.source)}
+                        </h3>
 
-                      <p className="p-4">{story.title}</p>
-                    </a>
-                  </div>
-                ))}
+                        <p className="p-4 text-center">{story.title}</p>
+                        <p className="p-4 text-sm text-center text-gray-500">
+                          {new Date(story.published_at).toLocaleString()}
+                        </p>
+                      </a>
+                    </div>
+                  ))}
               </div>
             </section>
           ))}
