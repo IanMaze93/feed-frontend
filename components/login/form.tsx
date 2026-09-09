@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, SubmitEvent } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [outputMessage, setOutputMessage] = useState("");
@@ -76,6 +78,10 @@ export default function LoginForm() {
         <button
           className="rounded border-1 border-[#ff6a00] p-2 hover:bg-[#ff6a00] font-bold hover:text-white"
           type="button"
+          onClick={() => {
+            // Redirect to the signup page
+            router.push("/signup");
+          }}
         >
           Sign Up
         </button>
