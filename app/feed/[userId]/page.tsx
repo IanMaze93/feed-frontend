@@ -72,7 +72,7 @@ export default async function Feed({ params }: Props) {
                       className="block text-lg text-black dark:text-white"
                     >
                       <h3
-                        className={`text-center font-bold ${getBadgeColor(story.source)}`}
+                        className={`text-center font-bold ${getBadgeColor(story.source)} text-white`}
                       >
                         {capitalize(story.source)}
                       </h3>
