@@ -1,3 +1,4 @@
+import { backendGet } from "@/app/lib/server/routes";
 import Banner from "../../../components/common/banner";
 
 type Props = {
@@ -6,22 +7,90 @@ type Props = {
   }>;
 };
 
+type Story = {
+  _id: string;
+  pointer_id: string;
+  title: string;
+  link: string;
+  source: string;
+  published_at: string;
+};
+
+type TopicStories = {
+  topic: string;
+  entries: Story[];
+};
+
+type StoriesResponse = {
+  stories: TopicStories[];
+};
+
 export default async function Feed({ params }: Props) {
   const { userId } = await params;
 
+  const data: StoriesResponse = await backendGet(`users/${userId}/stories`);
+
+  console.log(data);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="h-screen min-h-screen w-full bg-zinc-50 font-sans dark:bg-black">
       <Banner />
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <p
-          className="self-center font-bold"
-          style={{
-            color: "green",
-          }}
-        >
-          {" "}
-          Logged in! UserId: {userId}
-        </p>
+
+      <main className="h-[calc(100vh-145px)] w-full overflow-hidden">
+        <div className="flex h-full w-full gap-6 overflow-x-auto p-4">
+          {data.stories.map((topic) => (
+            <section
+              key={topic.topic}
+              className="
+                h-full
+                basis-full
+                sm:basis-[calc(50%-0.75rem)]
+                lg:basis-[calc(25%-1.125rem)]
+                shrink-0
+                grow-0
+                flex
+                flex-col
+                rounded-md
+                border-2
+                border-[#ff6a00]
+                shadow-md
+              "
+            >
+              <h2 className="mb-0 border-b-2 border-[#ff6a00] bg-[#ff6a00] text-center text-2xl font-bold text-black">
+                {topic.topic}
+              </h2>
+
+              <div className="flex-1 overflow-y-auto">
+                {topic.entries.map((story) => (
+                  <div
+                    key={story._id}
+                    className="border-b-2 border-[#ff6a00] p-4"
+                  >
+                    <p>
+                      <strong>Title:</strong> {story.title}
+                    </p>
+
+                    <p>
+                      <strong>Source:</strong> {story.source}
+                    </p>
+
+                    <p>
+                      <strong>Link:</strong>{" "}
+                      <a
+                        href={story.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="break-all text-blue-500 hover:underline"
+                      >
+                        {story.link}
+                      </a>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
       </main>
     </div>
   );
