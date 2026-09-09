@@ -20,23 +20,30 @@ export default function LoginForm() {
       });
 
       if (!response.ok) {
-        setOutputMessage("Login failed. Please check your username and password.");
+        setOutputMessage(
+          "Login failed. Please check your username and password."
+        );
         return;
       }
 
       setOutputMessage("");
-      const {user_id} = await response.json();
+      const { user_id } = await response.json();
       console.log("Login successful! User ID:", user_id);
       // Handle successful login (e.g., redirect, store token, etc.)
     } catch (error) {
       console.error("Login failed:", error);
-      setOutputMessage("Login failed. Please check your username and password.");
+      setOutputMessage(
+        "Login failed. Please check your username and password."
+      );
       // Handle login failure (e.g., show error message)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-4 self-center rounded-md border-2 border-[#ff6a00] p-4 shadow-md flex-col items-start">
+    <form
+      onSubmit={handleSubmit}
+      className="flex gap-4 self-center rounded-md border-2 border-[#ff6a00] p-4 shadow-md flex-col items-start"
+    >
       <div className="flex items-center">
         <label className="w-25 font-bold">UserName:</label>
         <input
@@ -74,13 +81,13 @@ export default function LoginForm() {
         </button>
       </div>
       <p
-            className="text-center font-bold"
-            style={{
-              color: 'red',
-            }}
-          >
-            {outputMessage}
-          </p>
+        className="text-center font-bold"
+        style={{
+          color: "red",
+        }}
+      >
+        {outputMessage}
+      </p>
     </form>
   );
 }
