@@ -12,21 +12,20 @@ export default function SignupForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [outputMessage, setOutputMessage] = useState("");
+  const [outputMessageColor, setOutputMessageColor] = useState("");
 
   async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
       if (password !== confirmPassword) {
+        setOutputMessageColor("red");
         setOutputMessage("Passwords do not match.");
         return;
       }
 
       const response = await fetch("/api/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           username,
           password,
@@ -37,18 +36,20 @@ export default function SignupForm() {
       });
 
       if (!response.ok) {
+        setOutputMessageColor("red");
         setOutputMessage(
           "Signup failed. Please check your username and password."
         );
         return;
       }
-
-      setOutputMessage("");
+      setOutputMessageColor("green");
+      setOutputMessage("Account Created Successfully!");
       const { user_id } = await response.json();
       console.log("Signup successful! User ID:", user_id);
       // Handle successful signup (e.g., redirect, store token, etc.)
     } catch (error) {
       console.error("Signup failed:", error);
+      setOutputMessageColor("red");
       setOutputMessage(
         "Signup failed. Please check your username and password."
       );
@@ -144,9 +145,9 @@ export default function SignupForm() {
         </button>
       </div>
       <p
-        className="text-center font-bold"
+        className="font-bold self-center"
         style={{
-          color: "red",
+          color: outputMessageColor,
         }}
       >
         {outputMessage}

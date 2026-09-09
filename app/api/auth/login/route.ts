@@ -1,11 +1,10 @@
 import { backendPost } from "@/app/lib/server/routes";
 
 export async function POST(request: Request) {
-  const response = await backendPost(request, "auth/login");
-
-  const data = await response.json();
+  const body = await request.json();
+  const data = await backendPost("auth/login", body);
 
   return Response.json(data, {
-    status: response.status,
+    status: 200,
   });
 }

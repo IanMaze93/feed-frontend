@@ -1,14 +1,9 @@
 const API_URL = process.env.BACKEND_URL;
 
-export async function backendPost(request: Request, endpoint: string) {
+export async function backendPost<T>(endpoint: string, body: T): Promise<T> {
   if (!API_URL) {
-    return Response.json(
-      { error: "Backend URL is not configured" },
-      { status: 500 }
-    );
+    throw new Error("Backend URL is not configured");
   }
-
-  const body = await request.json();
 
   const response = await fetch(`${API_URL}/${endpoint}`, {
     method: "POST",
@@ -20,7 +15,9 @@ export async function backendPost(request: Request, endpoint: string) {
 
   const data = await response.json();
 
-  return Response.json(data, {
-    status: response.status,
-  });
+  if (!response.ok) {
+    throw new Error(`Backend request failed with status ${response.status}`);
+  }
+
+  return data;
 }
