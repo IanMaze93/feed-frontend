@@ -1,4 +1,6 @@
 import { backendGet } from "@/app/lib/server/routes";
+import { capitalize } from "@/app/lib/utils/formatting";
+import { getBadgeColor } from "@/app/lib/utils/badge";
 import Banner from "../../../components/common/banner";
 
 type Props = {
@@ -56,35 +58,27 @@ export default async function Feed({ params }: Props) {
                 shadow-md
               "
             >
-              <h2 className="mb-0 border-b-2 border-[#ff6a00] bg-[#ff6a00] text-center text-2xl font-bold text-black">
+              <h2 className="mb-0 border-b-2 border-[#ff6a00] text-center text-2xl font-bold text-white p-4">
                 {topic.topic}
               </h2>
 
               <div className="flex-1 overflow-y-auto">
                 {topic.entries.map((story) => (
-                  <div
-                    key={story._id}
-                    className="border-b-2 border-[#ff6a00] p-4"
-                  >
-                    <p>
-                      <strong>Title:</strong> {story.title}
-                    </p>
-
-                    <p>
-                      <strong>Source:</strong> {story.source}
-                    </p>
-
-                    <p>
-                      <strong>Link:</strong>{" "}
-                      <a
-                        href={story.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="break-all text-blue-500 hover:underline"
+                  <div key={story._id} className="border-b-2 border-[#ff6a00]">
+                    <a
+                      href={story.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-lg text-black dark:text-white"
+                    >
+                      <h3
+                        className={`text-center font-bold ${getBadgeColor(story.source)} text-white`}
                       >
-                        {story.link}
-                      </a>
-                    </p>
+                        {capitalize(story.source)}
+                      </h3>
+
+                      <p className="p-4">{story.title}</p>
+                    </a>
                   </div>
                 ))}
               </div>
