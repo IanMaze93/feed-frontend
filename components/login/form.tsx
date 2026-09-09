@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, SubmitEvent } from "react";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [outputMessage, setOutputMessage] = useState("");
 
-  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
