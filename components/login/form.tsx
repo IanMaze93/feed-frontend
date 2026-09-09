@@ -28,6 +28,7 @@ export default function LoginForm() {
       setOutputMessage("");
       const { user_id } = await response.json();
       console.log("Login successful! User ID:", user_id);
+      router.push(`/feed/${user_id}`); // Redirect to the feed page with the user ID
       // Handle successful login (e.g., redirect, store token, etc.)
     } catch (error) {
       console.error("Login failed:", error);

@@ -1,5 +1,6 @@
 "use client";
 
+import { delay } from "@/app/lib/utils/delay";
 import { useRouter } from "next/dist/client/components/navigation";
 import { useState, SubmitEvent } from "react";
 
@@ -44,16 +45,16 @@ export default function SignupForm() {
       }
       setOutputMessageColor("green");
       setOutputMessage("Account Created Successfully!");
-      const { user_id } = await response.json();
-      console.log("Signup successful! User ID:", user_id);
-      // Handle successful signup (e.g., redirect, store token, etc.)
+      const userId = await response.json();
+      console.log("Signup successful! User ID:", userId);
+      await delay(2000);
+      router.push(`/`); // Redirect to the login page after successful signup
     } catch (error) {
       console.error("Signup failed:", error);
       setOutputMessageColor("red");
       setOutputMessage(
         "Signup failed. Please check your username and password."
       );
-      // Handle signup failure (e.g., show error message)
     }
   }
 
