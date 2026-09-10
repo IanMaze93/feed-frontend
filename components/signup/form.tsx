@@ -71,6 +71,7 @@ export default function SignupForm() {
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           placeholder="Username"
+          maxLength={30}
         />
       </div>
 
@@ -82,6 +83,7 @@ export default function SignupForm() {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           placeholder="Password"
+          maxLength={20}
         />
       </div>
 
@@ -93,6 +95,7 @@ export default function SignupForm() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           value={confirmPassword}
           placeholder="Confirm Password"
+          maxLength={20}
         />
       </div>
 
@@ -104,6 +107,7 @@ export default function SignupForm() {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           placeholder="Email"
+          maxLength={50}
         />
       </div>
 
@@ -115,6 +119,7 @@ export default function SignupForm() {
           onChange={(e) => setFirstName(e.target.value)}
           value={firstName}
           placeholder="First Name"
+          maxLength={30}
         />
       </div>
 
@@ -126,6 +131,7 @@ export default function SignupForm() {
           onChange={(e) => setLastName(e.target.value)}
           value={lastName}
           placeholder="Last Name"
+          maxLength={30}
         />
       </div>
       <div className="flex gap-4 self-center">
