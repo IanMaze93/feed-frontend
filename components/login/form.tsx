@@ -54,6 +54,7 @@ export default function LoginForm() {
           name="username"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
+          maxLength={20}
           placeholder="Username"
           autoComplete="username"
         />
@@ -67,6 +68,7 @@ export default function LoginForm() {
           name="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          maxLength={20}
           placeholder="Password"
           autoComplete="current-password"
         />
