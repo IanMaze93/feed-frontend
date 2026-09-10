@@ -1,0 +1,13 @@
+services:
+  feed-frontend:
+    build:
+      context: .
+      dockerfile: docker/site.Dockerfile
+    container_name: feed-frontend
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    env_file:
+      - .env
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
