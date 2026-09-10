@@ -32,8 +32,6 @@ export default async function Feed({ params }: Props) {
 
   const data: StoriesResponse = await backendGet(`users/${userId}/stories`);
 
-  console.log(data);
-
   return (
     <div className="h-screen min-h-screen w-full bg-zinc-50 font-sans dark:bg-black">
       <Banner />
