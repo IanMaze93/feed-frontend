@@ -12,10 +12,15 @@ export default function LoginForm() {
   async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const formData = new FormData(event.currentTarget);
+
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          username: formData.get("username"),
+          password: formData.get("password"),
+        }),
       });
 
       if (!response.ok) {
@@ -39,6 +44,7 @@ export default function LoginForm() {
 
   return (
     <form
+      autoComplete="off"
       onSubmit={handleSubmit}
       className="flex gap-4 self-center rounded-md border-2 border-[#ff6a00] p-4 shadow-md flex-col items-start"
     >
@@ -47,9 +53,11 @@ export default function LoginForm() {
         <input
           className="rounded border-1 border-[#ff6a00]"
           type="text"
+          name="username"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           placeholder="Username"
+          autoComplete="username"
         />
       </div>
 
@@ -58,9 +66,11 @@ export default function LoginForm() {
         <input
           className="rounded border-1 border-[#ff6a00]"
           type="password"
+          name="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           placeholder="Password"
+          autoComplete="current-password"
         />
       </div>
 
