@@ -1,4 +1,5 @@
 import { backendGet } from "@/app/lib/server/routes";
+import { AllTopicStoriesResponseSchema } from "@/app/types/topics";
 
 export async function GET(request: Request) {
   const userId = request.headers.get("userId");
@@ -7,7 +8,7 @@ export async function GET(request: Request) {
   }
 
   const url = `/users/${userId}/stories`;
-  const data = await backendGet(url);
+  const data = AllTopicStoriesResponseSchema.parse(await backendGet(url));
 
   return Response.json(data, {
     status: 200,

@@ -2,6 +2,7 @@ import { backendGet } from "@/app/lib/server/routes";
 import { capitalize } from "@/app/lib/utils/formatting";
 import { getBadgeColor } from "@/app/lib/utils/badge";
 import Banner from "../../../components/common/banner";
+import type { AllTopicStoriesResponse } from "@/app/types/topics";
 
 type Props = {
   params: Promise<{
@@ -9,28 +10,12 @@ type Props = {
   }>;
 };
 
-type Story = {
-  _id: string;
-  pointer_id: string;
-  title: string;
-  link: string;
-  source: string;
-  published_at: string;
-};
-
-type TopicStories = {
-  topic: string;
-  entries: Story[];
-};
-
-type StoriesResponse = {
-  stories: TopicStories[];
-};
-
 export default async function Feed({ params }: Props) {
   const { userId } = await params;
 
-  const data: StoriesResponse = await backendGet(`users/${userId}/stories`);
+  const data: AllTopicStoriesResponse = await backendGet(
+    `users/${userId}/stories`
+  );
 
   return (
     <div className="h-screen min-h-screen w-full bg-zinc-50 font-sans dark:bg-black">
