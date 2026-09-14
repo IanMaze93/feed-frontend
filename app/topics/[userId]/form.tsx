@@ -197,11 +197,36 @@ export default function EditTopicsForm({ userId, initialTopics }: Props) {
         </p>
       </div>
 
+      <div className="mt-4 rounded-lg border border-orange-500 bg-zinc-950 p-4 mb-5">
+        <p className="text-sm font-semibold text-zinc-200">Pointer Examples</p>
+
+        <div className="mt-2 space-y-2 text-sm text-zinc-400">
+          <div>
+            <span className="font-medium text-orange-400">Reddit:</span>{" "}
+            <code className="text-zinc-300">
+              https://www.reddit.com/r/news.rss
+            </code>
+          </div>
+
+          <div>
+            <span className="font-medium text-orange-400">Google News:</span>{" "}
+            <code className="text-zinc-300">
+              https://news.google.com/rss/search?q=news
+            </code>
+          </div>
+        </div>
+
+        <p className="mt-3 text-xs text-zinc-500">
+          Add the URL for the subreddit or Google News search you want to
+          follow.
+        </p>
+      </div>
+
       <div className="space-y-5">
         {topics.map((topic, topicIndex) => (
           <div
             key={topic._id ?? `new-${topicIndex}`}
-            className="rounded-xl border border-zinc-800 bg-zinc-950 p-5"
+            className="rounded-xl border border-orange-500 bg-zinc-950 p-5"
           >
             <div className="flex gap-3">
               <input
