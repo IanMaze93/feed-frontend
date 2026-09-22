@@ -1,6 +1,7 @@
 enum SourceType {
   REDDIT = "reddit",
   GOOGLE_NEWS = "google",
+  WEBSITE = "website",
 }
 
 export function getBadgeColor(source: string): string {
@@ -10,6 +11,9 @@ export function getBadgeColor(source: string): string {
 
     case SourceType.GOOGLE_NEWS:
       return "bg-green-900";
+
+    case SourceType.WEBSITE:
+      return "bg-blue-900";
 
     default:
       return "bg-gray-900";
