@@ -267,6 +267,8 @@ export default function EditTopicsForm({ userId, initialTopics }: Props) {
                     <option value="reddit">Reddit</option>
 
                     <option value="google">Google News</option>
+
+                    <option value="website">Website</option>
                   </select>
 
                   <input
