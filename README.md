@@ -14,6 +14,7 @@ Currently supported sources include:
 
 - **Google News**
 - **Reddit**
+- **Standard RSS**
 
 Additional source types can be added as the project grows.
 

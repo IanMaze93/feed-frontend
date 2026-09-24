@@ -214,6 +214,11 @@ export default function EditTopicsForm({ userId, initialTopics }: Props) {
               https://news.google.com/rss/search?q=news
             </code>
           </div>
+
+          <div>
+            <span className="font-medium text-orange-400">Website:</span>{" "}
+            <code className="text-zinc-300">https://example.com/rss</code>
+          </div>
         </div>
 
         <p className="mt-3 text-xs text-zinc-500">
